@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Materialize Form Example</title>
+<!-- Materialize CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<!-- jQuery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+ 
+    <div class="container">
+<h3 class="center-align">Simple Form</h3>
+<form id="myForm">
+<div class="input-field">
+<input id="name" type="text" name="name" class="validate" required>
+<label for="name">Name</label>
+</div>
+ 
+            <div class="input-field">
+<input id="email" type="email" name="email" class="validate" required>
+<label for="email">Email</label>
+</div>
+ 
+            <div class="input-field">
+<input id="password" type="password" name="password" class="validate" required>
+<label for="password">Password</label>
+</div>
+ 
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+<i class="material-icons right">send</i>
+</button>
+</form>
+</div>
+ 
+    <!-- Materialize JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- jQuery Script -->
+<script>
+        $(document).ready(function() {
+            $('#myForm').submit(function(event) {
+                event.preventDefault();
+ 
+                // Get form data
+                var formData = {
+                    name: $('#name').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                };
+ 
+                // Send form data to server
+                $.ajax({
+                    type: "POST",
+                    url: "/submitForm",
+                    data: formData,
+                    success: function(response) {
+                        alert(response.message);
+                        $('#myForm')[0].reset();
+                    },
+                    error: function(error) {
+                        alert("Error: " + error.message);
+                    }
+                });
+            });
+        });
+</script>
+</body>
+</html>
